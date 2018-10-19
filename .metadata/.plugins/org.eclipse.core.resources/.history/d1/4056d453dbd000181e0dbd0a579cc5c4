@@ -1,0 +1,50 @@
+/*
+ ============================================================================
+ Name        : Assignment1.c
+ Author      : Daniel Webb
+ Version     :
+ Copyright   : Your copyright notice
+ Description : Delegate shell commands via systemcall in child process
+ ============================================================================
+ */
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+#include <sys/wait.h>
+#include <sys/shm.h>
+
+int main(void) {
+
+	/*
+	 * Initialize Arguments
+	 */
+	char * shared_memory;
+	key_t shared_memory_key;
+	int shared_memory_id;
+	char * shared_memory_addr;
+	char * shared_memory_file = "/tmp/shared_memory";
+
+	while(1){
+
+		if(( shared_memory_key = ftok(shared_memory_file, 'x')) == -1){
+			perror("ftok");
+			exit(1);
+		}
+
+		if((shared_memory_id = shmget(shared_memory_key, 1024, 0644 | IPC_CREAT)) == -1){
+			perror("shmget");
+			exit(1);
+		}
+		if((shared_memory_addr = (char *) shmat(shared_memory_id, 0, 0)) == -1){
+			perror("shmat");
+			exit(1);
+		}
+
+		printf("Reading: %s", shared_memory_addr);
+
+		shmdt(shared_memory_addr);
+
+	}
+}

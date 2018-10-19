@@ -1,0 +1,30 @@
+/*
+ ============================================================================
+ Name        : Assignment1.c
+ Author      : Daniel Webb
+ Version     :
+ Copyright   : Your copyright notice
+ Description : Hello World in C, Ansi-style
+ ============================================================================
+ */
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(void) {
+
+	while(1){
+
+		char str[100];
+		printf("\nEnter a command to run: ");
+		scanf("%s", str);
+
+		char * command_tokens;
+
+		command_tokens = strok(str, " ");
+		execv("/bin/sh", command_tokens);
+
+		printf("You entered %s", str);
+
+	}
+}

@@ -1,0 +1,51 @@
+/*
+ ============================================================================
+ Name        : Assignment1.c
+ Author      : Daniel Webb
+ Version     :
+ Copyright   : Your copyright notice
+ Description : Hello World in C, Ansi-style
+ ============================================================================
+ */
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main(void) {
+
+	while(1){
+
+		/*
+		 * Set the max input length and buffer to receive the stdin command
+		 */
+		size_t input_max = 100;
+		char * input;
+		printf("\nEnter a command to run: ");
+		getline(&input, &input_max, stdin);
+
+		/*
+		 * Keep a running count of command args as they are separated one by
+		 * one from the buffer char *. Initially allocate space for 5 args.
+		 */
+		size_t num_args = 0;
+		size_t num_args_allocated = 5;
+		char ** command_args = calloc(num_args_allocated, sizeof(char *));
+
+		char * arg = strtok(input, " ");
+
+		if(arg == NULL)
+		{
+			printf("No arguments provided.");
+			continue;
+		}
+
+		while(arg != NULL)
+		{
+			printf("%s\n", arg);
+			arg = strtok(NULL, " ");
+		}
+		//execv("/bin/sh", command_tokens);
+
+	}
+}

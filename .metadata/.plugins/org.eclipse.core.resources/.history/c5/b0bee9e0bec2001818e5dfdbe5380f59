@@ -1,0 +1,106 @@
+/*
+ ============================================================================
+ Name        : Assignment1.c
+ Author      : Daniel Webb
+ Version     :
+ Copyright   : Your copyright notice
+ Description : Hello World in C, Ansi-style
+ ============================================================================
+ */
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+#include <sys/wait.h>
+
+int main(void) {
+
+	while(1){
+
+		/*
+		 * Set the max input length and buffer to receive the stdin command
+		 */
+		size_t input_max = 100;
+		char * input = calloc(input_max, sizeof(char));
+		printf("\nEnter a command to run: ");
+		getline(&input, &input_max, stdin);
+		input[sizeof(input) - 1] = '\0';
+
+		/*
+		 * Keep a running count of command args as they are separated one by
+		 * one from the buffer char *. Initially allocate space for 5 args.
+		 */
+		size_t arg_index = 0;
+		size_t num_args_allocated = 5;
+		size_t max_arg_length = 100;
+
+		char * command_args [num_args_allocated];
+
+		char * arg = strtok(input, " ");
+
+		if(arg == NULL)
+		{
+			printf("No arguments provided.");
+			continue;
+		}
+
+		while(arg != NULL)
+		{
+			if(arg_index == num_args_allocated)
+			{
+				//allocate more space by 5 if ran out fo space
+				num_args_allocated += 5;
+				command_args = (char*) realloc(command_args, num_args_allocated * sizeof(char *));
+			}
+			// add argument to the char **
+			command_args[arg_index] = (char *) malloc(max_arg_length * sizeof(char));
+			strcpy(command_args[arg_index], arg);
+			arg_index++;
+
+			arg = strtok(NULL, " ");
+		}
+
+		int file_descriptors[2];
+		pipe(file_descriptors);
+
+		// redirect stdout and stderr to the same pipe
+
+
+		close(file_descriptors[1]);
+
+		pid_t pid = fork();
+		if (pid == -1){
+			printf("Fork error.");
+			exit(1);
+		} else if (pid != 0){
+			//parent
+			dup2(file_descriptors[1], STDOUT_FILENO);
+			dup2(file_descriptors[1], STDERR_FILENO);
+		} else {
+			//child
+			close(file_descriptors[0]);
+			close(file_descriptors[1]);
+			char * command = command_args[0];
+			execvp(command, command_args);
+			exit(0);
+		}
+		wait(NULL);
+
+		// print result of the command
+		char buffer[4096];
+		while (1) {
+		  ssize_t count = read(file_descriptors[0], buffer, sizeof(buffer));
+		  if (count == -1) {
+			  printf("Error");
+		  } else if (count == 0) {
+		    break;
+		  } else {
+		    printf("%s", buffer);
+		  }
+		}
+		close(file_descriptors[0]);
+
+
+	}
+}

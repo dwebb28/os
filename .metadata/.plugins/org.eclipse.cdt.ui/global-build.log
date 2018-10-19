@@ -1,0 +1,314 @@
+20:33:16 **** Incremental Build of configuration Debug for project Processor ****
+make all 
+Building target: Processor
+Invoking: GCC C Linker
+gcc -lpthread -o "Processor"  ./src/processor.o   
+./src/processor.o: In function `main':
+/home/shadowfax/eclipse-workspace/Processor/Debug/../src/processor.c:32: undefined reference to `sem_open'
+makefile:30: recipe for target 'Processor' failed
+/home/shadowfax/eclipse-workspace/Processor/Debug/../src/processor.c:33: undefined reference to `sem_open'
+/home/shadowfax/eclipse-workspace/Processor/Debug/../src/processor.c:37: undefined reference to `sem_wait'
+/home/shadowfax/eclipse-workspace/Processor/Debug/../src/processor.c:57: undefined reference to `sem_post'
+collect2: error: ld returned 1 exit status
+make: *** [Processor] Error 1
+20:35:18 **** Incremental Build of configuration Debug for project Processor ****
+make all 
+Building target: Processor
+Invoking: GCC C Linker
+gcc -pthread -o "Processor"  ./src/processor.o   
+Finished building target: Processor
+ 
+20:35:41 **** Incremental Build of configuration Debug for project Processor ****
+make all 
+make: Nothing to be done for 'all'.
+20:36:13 **** Incremental Build of configuration Debug for project Processor ****
+make all 
+make: Nothing to be done for 'all'.
+20:39:18 **** Incremental Build of configuration Debug for project Processor ****
+make all 
+Building file: ../src/processor.c
+Invoking: GCC C Compiler
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -lpthread -MMD -MP -MF"src/processor.d" -MT"src/processor.o" -o "src/processor.o" "../src/processor.c"
+../src/processor.c: In function ‘main’:
+../src/processor.c:32:58: error: ‘S_IWUSR’ undeclared (first use in this function); did you mean ‘SI_USER’?
+  sem_t * semaphore_rec_id = sem_open(sem_rec, IPC_CREAT, S_IWUSR|S_IRUSER, 0);
+                                                          ^~~~~~~
+                                                          SI_USER
+../src/processor.c:32:58: note: each undeclared identifier is reported only once for each function it appears in
+../src/processor.c:32:66: error: ‘S_IRUSER’ undeclared (first use in this function); did you mean ‘S_IWUSR’?
+  sem_t * semaphore_rec_id = sem_open(sem_rec, IPC_CREAT, S_IWUSR|S_IRUSER, 0);
+                                                                  ^~~~~~~~
+                                                                  S_IWUSR
+../src/processor.c:48:68: warning: comparison between pointer and integer
+   if((shared_memory_addr = (char *) shmat(shared_memory_id, 0, 0)) == -1){
+                                                                    ^~
+../src/processor.c:24:9: warning: unused variable ‘shared_memory’ [-Wunused-variable]
+  char * shared_memory;
+         ^~~~~~~~~~~~~
+src/subdir.mk:18: recipe for target 'src/processor.o' failed
+make: *** [src/processor.o] Error 1
+20:40:33 **** Incremental Build of configuration Debug for project Processor ****
+make all 
+Building file: ../src/processor.c
+Invoking: GCC C Compiler
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -lpthread -MMD -MP -MF"src/processor.d" -MT"src/processor.o" -o "src/processor.o" "../src/processor.c"
+../src/processor.c: In function ‘main’:
+../src/processor.c:32:58: error: ‘S_IRUSR’ undeclared (first use in this function); did you mean ‘SI_USER’?
+  sem_t * semaphore_rec_id = sem_open(sem_rec, IPC_CREAT, S_IRUSR|S_IWUSR, 0);
+                                                          ^~~~~~~
+                                                          SI_USER
+../src/processor.c:32:58: note: each undeclared identifier is reported only once for each function it appears in
+../src/processor.c:32:66: error: ‘S_IWUSR’ undeclared (first use in this function); did you mean ‘S_IRUSR’?
+  sem_t * semaphore_rec_id = sem_open(sem_rec, IPC_CREAT, S_IRUSR|S_IWUSR, 0);
+                                                                  ^~~~~~~
+                                                                  S_IRUSR
+../src/processor.c:48:68: warning: comparison between pointer and integer
+   if((shared_memory_addr = (char *) shmat(shared_memory_id, 0, 0)) == -1){
+                                                                    ^~
+../src/processor.c:24:9: warning: unused variable ‘shared_memory’ [-Wunused-variable]
+  char * shared_memory;
+         ^~~~~~~~~~~~~
+src/subdir.mk:18: recipe for target 'src/processor.o' failed
+make: *** [src/processor.o] Error 1
+20:41:00 **** Incremental Build of configuration Debug for project Processor ****
+make all 
+Building file: ../src/processor.c
+Invoking: GCC C Compiler
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -lpthread -MMD -MP -MF"src/processor.d" -MT"src/processor.o" -o "src/processor.o" "../src/processor.c"
+src/subdir.mk:18: recipe for target 'src/processor.o' failed
+../src/processor.c: In function ‘main’:
+../src/processor.c:32:58: error: ‘S_IWUSR’ undeclared (first use in this function); did you mean ‘SI_USER’?
+  sem_t * semaphore_rec_id = sem_open(sem_rec, IPC_CREAT, S_IWUSR, 0);
+                                                          ^~~~~~~
+                                                          SI_USER
+../src/processor.c:32:58: note: each undeclared identifier is reported only once for each function it appears in
+../src/processor.c:48:68: warning: comparison between pointer and integer
+   if((shared_memory_addr = (char *) shmat(shared_memory_id, 0, 0)) == -1){
+                                                                    ^~
+../src/processor.c:24:9: warning: unused variable ‘shared_memory’ [-Wunused-variable]
+  char * shared_memory;
+         ^~~~~~~~~~~~~
+make: *** [src/processor.o] Error 1
+20:42:19 **** Incremental Build of configuration Debug for project Processor ****
+make all 
+Building file: ../src/processor.c
+Invoking: GCC C Compiler
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -lpthread -MMD -MP -MF"src/processor.d" -MT"src/processor.o" -o "src/processor.o" "../src/processor.c"
+../src/processor.c: In function ‘main’:
+../src/processor.c:48:68: warning: comparison between pointer and integer
+   if((shared_memory_addr = (char *) shmat(shared_memory_id, 0, 0)) == -1){
+                                                                    ^~
+../src/processor.c:24:9: warning: unused variable ‘shared_memory’ [-Wunused-variable]
+  char * shared_memory;
+         ^~~~~~~~~~~~~
+Finished building: ../src/processor.c
+ 
+Building target: Processor
+Invoking: GCC C Linker
+gcc -pthread -o "Processor"  ./src/processor.o   
+Finished building target: Processor
+ 
+20:42:47 **** Incremental Build of configuration Debug for project Processor ****
+make all 
+make: Nothing to be done for 'all'.
+20:45:14 **** Incremental Build of configuration Debug for project Processor ****
+make all 
+Building file: ../src/processor.c
+Invoking: GCC C Compiler
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -lpthread -MMD -MP -MF"src/processor.d" -MT"src/processor.o" -o "src/processor.o" "../src/processor.c"
+../src/processor.c: In function ‘main’:
+../src/processor.c:49:68: warning: comparison between pointer and integer
+   if((shared_memory_addr = (char *) shmat(shared_memory_id, 0, 0)) == -1){
+                                                                    ^~
+../src/processor.c:25:9: warning: unused variable ‘shared_memory’ [-Wunused-variable]
+  char * shared_memory;
+         ^~~~~~~~~~~~~
+Finished building: ../src/processor.c
+ 
+Building target: Processor
+Invoking: GCC C Linker
+gcc -pthread -o "Processor"  ./src/processor.o   
+Finished building target: Processor
+ 
+20:45:22 **** Incremental Build of configuration Debug for project Processor ****
+make all 
+make: Nothing to be done for 'all'.
+20:46:31 **** Incremental Build of configuration Debug for project Processor ****
+make all 
+Building file: ../src/processor.c
+Invoking: GCC C Compiler
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -lpthread -MMD -MP -MF"src/processor.d" -MT"src/processor.o" -o "src/processor.o" "../src/processor.c"
+../src/processor.c: In function ‘main’:
+../src/processor.c:33:47: error: ‘O_CREAT’ undeclared (first use in this function); did you mean ‘IPC_CREAT’?
+  sem_t * semaphore_rec_id = sem_open(sem_rec, O_CREAT, S_IREAD|S_IWRITE, 0);
+                                               ^~~~~~~
+                                               IPC_CREAT
+../src/processor.c:33:47: note: each undeclared identifier is reported only once for each function it appears in
+../src/processor.c:49:68: warning: comparison between pointer and integer
+   if((shared_memory_addr = (char *) shmat(shared_memory_id, 0, 0)) == -1){
+                                                                    ^~
+../src/processor.c:25:9: warning: unused variable ‘shared_memory’ [-Wunused-variable]
+  char * shared_memory;
+src/subdir.mk:18: recipe for target 'src/processor.o' failed
+         ^~~~~~~~~~~~~
+make: *** [src/processor.o] Error 1
+20:47:27 **** Incremental Build of configuration Debug for project Processor ****
+make all 
+Building file: ../src/processor.c
+Invoking: GCC C Compiler
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -lpthread -MMD -MP -MF"src/processor.d" -MT"src/processor.o" -o "src/processor.o" "../src/processor.c"
+../src/processor.c: In function ‘main’:
+../src/processor.c:34:47: error: ‘O_CREAT’ undeclared (first use in this function); did you mean ‘IPC_CREAT’?
+  sem_t * semaphore_rec_id = sem_open(sem_rec, O_CREAT, S_IREAD|S_IWRITE, 0);
+                                               ^~~~~~~
+                                               IPC_CREAT
+../src/processor.c:34:47: note: each undeclared identifier is reported only once for each function it appears in
+../src/processor.c:50:68: warning: comparison between pointer and integer
+   if((shared_memory_addr = (char *) shmat(shared_memory_id, 0, 0)) == -1){
+                                                                    ^~
+../src/processor.c:26:9: warning: unused variable ‘shared_memory’ [-Wunused-variable]
+  char * shared_memory;
+         ^~~~~~~~~~~~~
+make: *** [src/processor.o] Error 1
+src/subdir.mk:18: recipe for target 'src/processor.o' failed
+20:48:31 **** Incremental Build of configuration Debug for project Processor ****
+make all 
+Building file: ../src/processor.c
+Invoking: GCC C Compiler
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -lpthread -MMD -MP -MF"src/processor.d" -MT"src/processor.o" -o "src/processor.o" "../src/processor.c"
+../src/processor.c: In function ‘main’:
+../src/processor.c:51:68: warning: comparison between pointer and integer
+   if((shared_memory_addr = (char *) shmat(shared_memory_id, 0, 0)) == -1){
+                                                                    ^~
+../src/processor.c:27:9: warning: unused variable ‘shared_memory’ [-Wunused-variable]
+  char * shared_memory;
+         ^~~~~~~~~~~~~
+Finished building: ../src/processor.c
+ 
+Building target: Processor
+Invoking: GCC C Linker
+gcc -pthread -o "Processor"  ./src/processor.o   
+Finished building target: Processor
+ 
+20:48:41 **** Incremental Build of configuration Debug for project Processor ****
+make all 
+make: Nothing to be done for 'all'.
+20:49:11 **** Incremental Build of configuration Debug for project Processor ****
+make all 
+Building file: ../src/processor.c
+Invoking: GCC C Compiler
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -lpthread -MMD -MP -MF"src/processor.d" -MT"src/processor.o" -o "src/processor.o" "../src/processor.c"
+../src/processor.c: In function ‘main’:
+../src/processor.c:51:68: warning: comparison between pointer and integer
+   if((shared_memory_addr = (char *) shmat(shared_memory_id, 0, 0)) == -1){
+                                                                    ^~
+../src/processor.c:33:9: warning: unused variable ‘sem_proc’ [-Wunused-variable]
+  char * sem_proc = "/processor_semaphore";
+         ^~~~~~~~
+../src/processor.c:27:9: warning: unused variable ‘shared_memory’ [-Wunused-variable]
+  char * shared_memory;
+         ^~~~~~~~~~~~~
+Finished building: ../src/processor.c
+ 
+Building target: Processor
+Invoking: GCC C Linker
+gcc -pthread -o "Processor"  ./src/processor.o   
+Finished building target: Processor
+ 
+20:49:15 **** Incremental Build of configuration Debug for project Processor ****
+make all 
+make: Nothing to be done for 'all'.
+20:53:06 **** Incremental Build of configuration Debug for project Processor ****
+make all 
+make: Nothing to be done for 'all'.
+20:54:34 **** Incremental Build of configuration Debug for project Receiver ****
+make all 
+Building file: ../src/receiver.c
+Invoking: GCC C Compiler
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"src/receiver.d" -MT"src/receiver.o" -o "src/receiver.o" "../src/receiver.c"
+../src/receiver.c: In function ‘main’:
+../src/receiver.c:53:68: warning: comparison between pointer and integer
+   if((shared_memory_addr = (char *) shmat(shared_memory_id, 0, 0)) == -1){
+                                                                    ^~
+../src/receiver.c:35:9: warning: unused variable ‘sem_proc’ [-Wunused-variable]
+  char * sem_proc = "/processor_semaphore";
+         ^~~~~~~~
+../src/receiver.c:29:9: warning: unused variable ‘shared_memory’ [-Wunused-variable]
+  char * shared_memory;
+         ^~~~~~~~~~~~~
+Finished building: ../src/receiver.c
+ 
+Building target: Receiver
+Invoking: GCC C Linker
+gcc -pthread -o "Receiver"  ./src/receiver.o   
+Finished building target: Receiver
+ 
+20:55:04 **** Incremental Build of configuration Debug for project Receiver ****
+make all 
+make: Nothing to be done for 'all'.
+20:55:53 **** Incremental Build of configuration Debug for project Receiver ****
+make all 
+Building file: ../src/receiver.c
+Invoking: GCC C Compiler
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"src/receiver.d" -MT"src/receiver.o" -o "src/receiver.o" "../src/receiver.c"
+../src/receiver.c: In function ‘main’:
+../src/receiver.c:53:68: warning: comparison between pointer and integer
+   if((shared_memory_addr = (char *) shmat(shared_memory_id, 0, 0)) == -1){
+                                                                    ^~
+../src/receiver.c:29:9: warning: unused variable ‘shared_memory’ [-Wunused-variable]
+  char * shared_memory;
+         ^~~~~~~~~~~~~
+Finished building: ../src/receiver.c
+ 
+Building target: Receiver
+Invoking: GCC C Linker
+gcc -pthread -o "Receiver"  ./src/receiver.o   
+Finished building target: Receiver
+ 
+20:56:03 **** Incremental Build of configuration Debug for project Receiver ****
+make all 
+make: Nothing to be done for 'all'.
+20:56:21 **** Incremental Build of configuration Debug for project Processor ****
+make all 
+Building file: ../src/processor.c
+Invoking: GCC C Compiler
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -lpthread -MMD -MP -MF"src/processor.d" -MT"src/processor.o" -o "src/processor.o" "../src/processor.c"
+../src/processor.c: In function ‘main’:
+../src/processor.c:51:68: warning: comparison between pointer and integer
+   if((shared_memory_addr = (char *) shmat(shared_memory_id, 0, 0)) == -1){
+                                                                    ^~
+../src/processor.c:27:9: warning: unused variable ‘shared_memory’ [-Wunused-variable]
+  char * shared_memory;
+         ^~~~~~~~~~~~~
+Finished building: ../src/processor.c
+ 
+Building target: Processor
+Invoking: GCC C Linker
+gcc -pthread -o "Processor"  ./src/processor.o   
+Finished building target: Processor
+ 
+21:00:53 **** Incremental Build of configuration Debug for project Assignment1 ****
+make all 
+make: Nothing to be done for 'all'.
+21:00:54 **** Incremental Build of configuration Debug for project Processor ****
+make all 
+make: Nothing to be done for 'all'.
+21:00:54 **** Incremental Build of configuration Debug for project Receiver ****
+make all 
+Building file: ../src/receiver.c
+Invoking: GCC C Compiler
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"src/receiver.d" -MT"src/receiver.o" -o "src/receiver.o" "../src/receiver.c"
+../src/receiver.c: In function ‘main’:
+../src/receiver.c:53:68: warning: comparison between pointer and integer
+   if((shared_memory_addr = (char *) shmat(shared_memory_id, 0, 0)) == -1){
+                                                                    ^~
+../src/receiver.c:29:9: warning: unused variable ‘shared_memory’ [-Wunused-variable]
+  char * shared_memory;
+         ^~~~~~~~~~~~~
+Finished building: ../src/receiver.c
+ 
+Building target: Receiver
+Invoking: GCC C Linker
+gcc -pthread -o "Receiver"  ./src/receiver.o   
+Finished building target: Receiver
+ 
