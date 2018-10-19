@@ -65,7 +65,7 @@ int main(void) {
 		}
 		printf("Number of digits: %d\n", num_count);
 
-		if((secrets_file = fopen("secrets.out", "w")) == NULL){
+		if((secrets_file = fopen("secrets.out", "a")) == NULL){
 			printf("Could not open secrets.out file!\n");
 			exit(1);
 		}
