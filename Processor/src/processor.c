@@ -24,14 +24,12 @@ int main(void) {
 	/*
 	 * Initialize Arguments
 	 */
-	char * shared_memory;
 	key_t shared_memory_key;
 	int shared_memory_id;
 	char * shared_memory_addr;
 	char * shared_memory_file = "/tmp/shared_memory";
 	char * sem_rec = "/receiver_semaphore";
 	char * sem_proc = "/processor_semaphore";
-	char * cool_index;
 
 	sem_t * semaphore_rec_id = sem_open(sem_rec, O_CREAT, S_IREAD|S_IWRITE, 0);
 	sem_t * semaphore_proc_id = sem_open(sem_proc, O_CREAT, S_IREAD|S_IWRITE, 0);
