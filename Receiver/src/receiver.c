@@ -1,10 +1,11 @@
 /*
  ============================================================================
- Name        : Assignment1.c
+ Name        : receiver.c
  Author      : Daniel Webb
  Version     :
  Copyright   : Your copyright notice
- Description : Delegate shell commands via systemcall in child process
+ Description : Receive text from the user and send strings to shared memory only if
+ 	 	 	   they include the substring "C00L"
  ============================================================================
  */
 
