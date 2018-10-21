@@ -1,10 +1,10 @@
 /*
  ============================================================================
- Name        : Assignment1.c
+ Name        : processor.c
  Author      : Daniel Webb
  Version     :
  Copyright   : Your copyright notice
- Description : Delegate shell commands via systemcall in child process
+ Description : Pull strings out of the shared memory and compute how many digits are in them
  ============================================================================
  */
 
