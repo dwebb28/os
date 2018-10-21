@@ -1,0 +1,4 @@
+cd to Debug directory
+
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -lpthread -MMD -MP -MF"src/processor.d" -MT"src/processor.o" -o "src/processor.o" "../src/processor.c"
+gcc -pthread -o "Processor" ./src/processor.o
