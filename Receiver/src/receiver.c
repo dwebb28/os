@@ -71,11 +71,18 @@ int main(void) {
 		getline(&input, &input_max, stdin);
 		input[strlen(input) - 1] = '\0';
 
-		memcpy(shared_memory_addr, input, strlen(input) + 1);
+		if( strstr(input, "C00L") != NULL ){
+			memcpy(shared_memory_addr, input, strlen(input) + 1);
 
-		shmdt(shared_memory_addr);
+			printf("Success");
+			shmdt(shared_memory_addr);
 
-		sem_post(semaphore_rec_id);
-		sem_wait(semaphore_proc_id);
+			sem_post(semaphore_rec_id);
+			sem_wait(semaphore_proc_id);
+		}else{
+			printf("Not C00L");
+		}
+
+
 	}
 }

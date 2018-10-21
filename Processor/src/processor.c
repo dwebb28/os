@@ -31,9 +31,12 @@ int main(void) {
 	char * shared_memory_file = "/tmp/shared_memory";
 	char * sem_rec = "/receiver_semaphore";
 	char * sem_proc = "/processor_semaphore";
+	char * cool_index;
 
 	sem_t * semaphore_rec_id = sem_open(sem_rec, O_CREAT, S_IREAD|S_IWRITE, 0);
 	sem_t * semaphore_proc_id = sem_open(sem_proc, O_CREAT, S_IREAD|S_IWRITE, 0);
+	FILE * secrets_file;
+	int num_count = 0;
 
 	while(1){
 
@@ -54,6 +57,28 @@ int main(void) {
 		}
 
 		printf("Reading: %s\n", shared_memory_addr);
+
+		num_count = 0;
+		for( int i = 0; shared_memory_addr[i] != '\0'; i++){
+			// if C00L starts at the current index, skip ahead of it so the 0's
+			// in C00L are not counted
+			if( strstr(&shared_memory_addr[i], "C00L") == &shared_memory_addr[i] ){
+				i = i + 3;
+				continue;
+			}
+			if (isdigit(shared_memory_addr[i])){
+				num_count++;
+			}
+		}
+		printf("Number of digits: %d\n", num_count);
+
+		if((secrets_file = fopen("secrets.out", "a")) == NULL){
+			printf("Could not open secrets.out file!\n");
+			exit(1);
+		}
+
+		fprintf(secrets_file, "%d - %s\n", num_count, shared_memory_addr);
+		fclose(secrets_file);
 
 		shmdt(shared_memory_addr);
 
