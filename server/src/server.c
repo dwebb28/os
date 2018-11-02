@@ -40,6 +40,13 @@ int main(void) {
 	        exit(EXIT_FAILURE);
 	    }
 
+	    if (setsockopt(socket_file_desc, SOL_SOCKET, SO_REUSEADDR | SO_REUSEPORT,
+	                                                  &opt, sizeof(opt)))
+	    {
+	        perror("setsockopt");
+	        exit(EXIT_FAILURE);
+	    }
+
 	    socket_address.sin_family = AF_INET;
 	    socket_address.sin_addr.s_addr = INADDR_ANY;
 	    socket_address.sin_port = htons( listen_port );
@@ -63,24 +70,26 @@ int main(void) {
 	        exit(EXIT_FAILURE);
 	    }
 
-	    read_file_desc = read( created_socket , buffer, 1024);
+	    read_file_desc = read( created_socket , buffer, 4096);
 		printf("%s\n",buffer );
 		send(created_socket , thanks , strlen(thanks) , 0 );
-		printf("Responded to server\n");
+		printf("Responded to client\n");
+		close(socket_file_desc);
 
 		num_count = 0;
-		for( int i = 0; read_file_desc[i] != '\0'; i++){
+		for( int i = 0; buffer[i] != '\0'; i++){
 			// if C00L starts at the current index, skip ahead of it so the 0's
 			// in C00L are not counted
-			if( strstr(&read_file_desc[i], "C00L") == &read_file_desc[i] ){
+			if( strstr(&buffer[i], "C00L") == &buffer[i] ){
 				i = i + 3;
 				continue;
 			}
 			// if the character is a digit, add it to the count
-			if (isdigit(read_file_desc[i])){
+			if (isdigit(buffer[i])){
 				num_count++;
 			}
 		}
+
 
 
 		printf("Number of digits: %d\n", num_count);

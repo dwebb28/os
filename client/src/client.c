@@ -76,7 +76,7 @@ int main(void) {
 		    }
 		    send(created_socket , input , strlen(input) , 0 );
 		    printf("[%s] sent\n", input);
-		    response = read( created_socket , buffer, 1024);
+		    response = read( created_socket , buffer, 4096);
 		    printf("Received %s\n",buffer );
 
 			// detach from the shared memory
