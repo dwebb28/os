@@ -15,8 +15,21 @@
 #include <sys/socket.h>
 #include <stdlib.h>
 #include <netinet/in.h>
+#include <signal.h>
+
+int total_num = 0;
+int total_lines = 0;
+
+void completionSummary(int sig){
+	printf("\nTotal lines received: [%d]\n", total_lines);
+	printf("Total numbers received: [%d]\n", total_num);
+	printf("exiting.\n");
+	exit(0);
+}
 
 int main(void) {
+
+	signal(SIGINT, completionSummary);
 
 	/*
 	 * Initialize Arguments
@@ -27,11 +40,13 @@ int main(void) {
     int opt = 1;
     int addrlen = sizeof(socket_address);
 	int num_count = 0;
-    char buffer[1024] = {0};
+    char * buffer;
 	int socket_file_desc, created_socket, read_file_desc;
     char *thanks = "Thank you";
 
 	while(1){
+
+		buffer = (char *) malloc(1024 * sizeof(char));
 
 		// wait for the receiver to notify us
 	    if ((socket_file_desc = socket(AF_INET, SOCK_STREAM, 0)) == 0)
@@ -71,7 +86,7 @@ int main(void) {
 	    }
 
 	    read_file_desc = read( created_socket , buffer, 4096);
-		printf("%s\n",buffer );
+		printf("[%s] received\n",buffer );
 		send(created_socket , thanks , strlen(thanks) , 0 );
 		printf("Responded to client\n");
 		close(socket_file_desc);
@@ -90,9 +105,11 @@ int main(void) {
 			}
 		}
 
-
+		free(buffer);
 
 		printf("Number of digits: %d\n", num_count);
+		total_num += num_count;
+		total_lines += 1;
 
 		// write the number of digits and the full string to file (append only)
 //		if((secrets_file = fopen("secrets.out", "a")) == NULL){

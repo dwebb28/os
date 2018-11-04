@@ -86,6 +86,8 @@ int main(void) {
 			printf("Not C00L");
 		}
 
+		free(input);
+
 
 	}
 }
