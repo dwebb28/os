@@ -1,0 +1,3 @@
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"src/client.d" -MT"src/client.o" -o "src/client.o" "../src/client.c"
+gcc  -o "client"  ./src/client.o   
+

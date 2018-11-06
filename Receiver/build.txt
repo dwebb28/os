@@ -1,0 +1,4 @@
+cd to Debug directory
+
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -lpthread -MMD -MP -MF"src/receiver.d" -MT"src/receiver.o" -o "src/receiver.o" "../src/receiver.c"
+gcc -pthread -o "Receiver" ./src/receiver.o

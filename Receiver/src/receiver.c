@@ -42,15 +42,18 @@ int main(void) {
 
 		input = (char *) malloc(input_max * sizeof(char));
 
+		// get shared memory key
 		if(( shared_memory_key = ftok(shared_memory_file, 'x')) == -1){
 			perror("ftok");
 			exit(1);
 		}
 
+		// get shared memory id associated with the above created key
 		if((shared_memory_id = shmget(shared_memory_key, 1024, 0644 | IPC_CREAT)) == -1){
 			perror("shmget");
 			exit(1);
 		}
+		// get the address of the shared memory and attach to it
 		if((shared_memory_addr = (char *) shmat(shared_memory_id, 0, 0)) == -1){
 			perror("shmat");
 			exit(1);
@@ -72,12 +75,15 @@ int main(void) {
 		getline(&input, &input_max, stdin);
 		input[strlen(input) - 1] = '\0';
 
+		//if C00L is a substirng of the user input, copy it to memory
 		if( strstr(input, "C00L") != NULL ){
 			memcpy(shared_memory_addr, input, strlen(input) + 1);
 
 			printf("Success");
+			// detach from the shared memory
 			shmdt(shared_memory_addr);
 
+			// tell the processor we are done and wait for the response from the processor
 			sem_post(semaphore_rec_id);
 			sem_wait(semaphore_proc_id);
 		}else{

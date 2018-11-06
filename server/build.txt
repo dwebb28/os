@@ -1,0 +1,3 @@
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"src/server.d" -MT"src/server.o" -o "src/server.o" "../src/server.c"
+gcc  -o "server"  ./src/server.o   
+
