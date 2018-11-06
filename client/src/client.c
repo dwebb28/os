@@ -58,26 +58,29 @@ int main(void) {
 		        return -1;
 		    }
 
+		    // allocate memory for the server
 		    memset(&server_address, '0', sizeof(server_address));
 
 		    server_address.sin_family = AF_INET;
 		    server_address.sin_port = htons(port);
 
+		    // connect to the server on the internal interface since running
+		    // onn the same machine
 		    if(inet_pton(AF_INET, "127.0.0.1", &server_address.sin_addr)<=0)
 		    {
-		        printf("\nInvalid address/ Address not supported \n");
+		        printf("\nFailed to connect on port for localhost. \n");
 		        return -1;
 		    }
 
 		    if (connect(created_socket, (struct sockaddr *)&server_address, sizeof(server_address)) < 0)
 		    {
-		        printf("\nConnection Failed \n");
+		        printf("\nFailed to connect and create the socket. \n");
 		        return -1;
 		    }
 		    send(created_socket , input , strlen(input) , 0 );
-		    printf("[%s] sent\n", input);
+		    printf("Sent: [%s] to server\n", input);
 		    response = read( created_socket , buffer, 4096);
-		    printf("Received %s\n",buffer );
+		    printf("Received [%s] from server\n",buffer );
 
 			// detach from the shared memory
 

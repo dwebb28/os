@@ -48,47 +48,49 @@ int main(void) {
 
 		buffer = (char *) malloc(1024 * sizeof(char));
 
-		// wait for the receiver to notify us
+		// create the socket
 	    if ((socket_file_desc = socket(AF_INET, SOCK_STREAM, 0)) == 0)
 	    {
-	        perror("socket creation has failed");
-	        exit(EXIT_FAILURE);
+	        perror("failed to create the socket");
+	        exit(1);
 	    }
 
+	    // allow socket reuse
 	    if (setsockopt(socket_file_desc, SOL_SOCKET, SO_REUSEADDR | SO_REUSEPORT,
 	                                                  &opt, sizeof(opt)))
 	    {
-	        perror("setsockopt");
-	        exit(EXIT_FAILURE);
+	        perror("failed to maintain the socket");
+	        exit(1);
 	    }
 
 	    socket_address.sin_family = AF_INET;
 	    socket_address.sin_addr.s_addr = INADDR_ANY;
 	    socket_address.sin_port = htons( listen_port );
 
-	    // Forcefully attaching socket to the port 8080
+	    // bind to port
 	    if (bind(socket_file_desc, (struct sockaddr *)&socket_address,
 	                                 sizeof(socket_address))<0)
 	    {
 	        perror("bind failed");
-	        exit(EXIT_FAILURE);
+	        exit(1);
 	    }
+	    // listen until connection by client
 	    if (listen(socket_file_desc, 3) < 0)
 	    {
-	        perror("listen");
-	        exit(EXIT_FAILURE);
+	        perror("listen for client");
+	        exit(1);
 	    }
 	    if ((created_socket = accept(socket_file_desc, (struct sockaddr *)&socket_address,
 	                       	   (socklen_t*)&addrlen))<0)
 	    {
-	        perror("accept");
+	        perror("accept and create socket");
 	        exit(EXIT_FAILURE);
 	    }
 
 	    read_file_desc = read( created_socket , buffer, 4096);
-		printf("[%s] received\n",buffer );
+		printf("Received: [%s]\n",buffer );
 		send(created_socket , thanks , strlen(thanks) , 0 );
-		printf("Responded to client\n");
+		printf("Response '%s' sent.\n", thanks);
 		close(socket_file_desc);
 
 		num_count = 0;
@@ -105,22 +107,20 @@ int main(void) {
 			}
 		}
 
-		free(buffer);
-
 		printf("Number of digits: %d\n", num_count);
 		total_num += num_count;
 		total_lines += 1;
 
 		// write the number of digits and the full string to file (append only)
-//		if((secrets_file = fopen("secrets.out", "a")) == NULL){
-//			printf("Could not open secrets.out file!\n");
-//			exit(1);
-//		}
-//
-//		//fprintf(secrets_file, "%d - %s\n", num_count, shared_memory_addr);
-//		fclose(secrets_file);
+		if((secrets_file = fopen("secrets.out", "a")) == NULL){
+			printf("Could not open secrets.out file!\n");
+			exit(1);
+		}
 
+		fprintf(secrets_file, "%d - %s\n", num_count, buffer);
+		fclose(secrets_file);
 
+		free(buffer);
 
 	}
 }
