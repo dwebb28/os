@@ -1,5 +1,5 @@
 struct rpc_data{
-	char * content;
+	char content [100];
 };
 
 program COUNT_NUMBERS{
