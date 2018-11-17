@@ -11,10 +11,21 @@
 #include <memory.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
+#include <signal.h>
 
 #ifndef SIG_PF
 #define SIG_PF void(*)(int)
 #endif
+
+int total_num = 0;
+int total_lines = 0;
+
+void completionSummary(int sig){
+	printf("\nTotal lines received: [%d]\n", total_lines);
+	printf("Total numbers received: [%d]\n", total_num);
+	printf("exiting.\n");
+	exit(0);
+}
 
 static void
 count_numbers_1(struct svc_req *rqstp, register SVCXPRT *transp)
@@ -50,16 +61,21 @@ count_numbers_1(struct svc_req *rqstp, register SVCXPRT *transp)
 	if (result != NULL && !svc_sendreply(transp, (xdrproc_t) _xdr_result, result)) {
 		svcerr_systemerr (transp);
 	}
+
+	total_lines = total_lines + 1;
+	total_num = total_num + *result;
+
 	if (!svc_freeargs (transp, (xdrproc_t) _xdr_argument, (caddr_t) &argument)) {
 		fprintf (stderr, "%s", "unable to free arguments");
 		exit (1);
 	}
 	return;
 }
-
 int
 main (int argc, char **argv)
 {
+	signal(SIGINT, completionSummary);
+
 	register SVCXPRT *transp;
 
 	pmap_unset (COUNT_NUMBERS, COUNT_VERS);

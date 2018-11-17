@@ -15,7 +15,6 @@ count_1_svc(rpc_data *argp, struct svc_req *rqstp)
 	char buffer [100];
 	strcpy(buffer, argp->content);
 	printf("Received %s with length %lu\n", buffer, strlen(buffer));
-	printf("Received %s with length %lu\n", argp->content, strlen(argp->content));
 
 	num_count = 0;
 	for( int i = 0; buffer[i] != '\0'; i++){
